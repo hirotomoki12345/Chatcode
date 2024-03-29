@@ -23,7 +23,7 @@ function inject() {
 }
 
 function Getchat() {
-    var gasUrl = 'https://script.google.com/macros/s/AKfycbz9CeB9DO5Yi9g0BMwWx3Fzt6h5SzZfba4yd5o1x8gyBCZgqFBL1JFflLv4MJqx0aMK/exec';
+    var gasUrl = 'https://script.google.com/macros/s/AKfycbzyrLVQeFp_3Cb2sJj8pU4IB4FlCUgT9ZeVdWCI8P2IsHK_skx8TZNM6J5e6GhBJlRg/exec';
     var url = gasUrl + '?id=' + idValue; 
     var xhr = new XMLHttpRequest();
     xhr.open('GET', url, true);
