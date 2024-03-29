@@ -61,7 +61,7 @@ function sendData() {
     var textValue = document.querySelector('.chatcode input[name="text"]').value;
     var nameValue = document.querySelector('.chatcode input[name="name"]').value;
 
-    var url = 'https://script.google.com/macros/s/AKfycbxqK6jNZlye20n6iPb_6C7ybK3Yp55LYRrfRHgUKd7LA0boktwfVJNJaDCGeHMmRryHnw/exec' + '?id=' + encodeURIComponent(idValue) + '&text=' + encodeURIComponent(textValue) + '&name=' + encodeURIComponent(nameValue);
+    var url = 'https://script.google.com/macros/s/AKfycbzVPygE_QkpaGKSCDwpQDYoFFsR8T6LC8ufGxgI-QTvL8iLRKLrXzlJxXPuaXWpJqQDlA/exec' + '?id=' + encodeURIComponent(idValue) + '&text=' + encodeURIComponent(textValue) + '&name=' + encodeURIComponent(nameValue);
     fetch(url)
         .then(response => {
             if (response.ok) {
