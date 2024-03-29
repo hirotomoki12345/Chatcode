@@ -1,4 +1,3 @@
-var idValue = '取得したID';
 var sendButton;
 
 inject();
