@@ -1,5 +1,10 @@
-<div class="chatsend"></div> //入力欄
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<div class="chatsend"></div>
 
-<div class="chatlist"></div> //出力欄
-<script>var idValue = '取得したID';</script>//取得したIDを入力してください。
+<div class="chatlist"></div>
+<script>
+  const urlParams = new URLSearchParams(window.location.search);
+  const idValue = urlParams.get('id');
+</script>
 <script src="https://raw.githubusercontent.com/hirotomoki12345/Chatcode/main/chat.js"></script>
