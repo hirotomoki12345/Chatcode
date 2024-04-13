@@ -1,6 +1,185 @@
-<div class="chatsend"></div> //入力欄
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chat</title>
+<style>
+    /* Reset CSS */
+    body, div, p, input, button {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-<div class="chatlist"></div> //出力欄
-<script>var idValue = 'ID';</script>//取得したIDを入力してください。
-<script src="https://raw.githubusercontent.com/hirotomoki12345/Chatcode/main/chat.js"></script>
+    /* Global Styles */
+    body {
+        font-family: Arial, sans-serif;
+    }
 
+    /* Chat Send Form */
+    .chatcode {
+        display: flex;
+        margin-bottom: 10px;
+    }
+
+    .chatcode input[type="text"] {
+        flex: 1;
+        padding: 5px;
+        margin-right: 5px;
+    }
+
+    .chatcode button {
+        padding: 5px 10px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+
+    .chatcode button:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
+    }
+
+    /* Chat List */
+    .chatlist {
+        overflow-y: auto;
+    }
+
+    .chat-item {
+        padding: 5px;
+        margin-bottom: 5px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+        .chatcode {
+            flex-wrap: wrap;
+        }
+
+        .chatcode input[type="text"] {
+            flex: 1 0 100%;
+            margin-bottom: 5px;
+        }
+
+        .chatcode button {
+            flex: 1 0 100%;
+        }
+    }
+</style>
+</head>
+<body>
+    <div class="chatlist"></div>
+    <div class="chatsend"></div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const idValue = urlParams.get('id');
+    </script>
+    <script>
+        var sendButton;
+
+        inject();
+
+        function inject() {
+            var existingDiv = document.querySelector('.chatcode');
+            if (existingDiv) {
+                return;
+            }
+
+            var div = document.createElement('div');
+            div.classList.add('chatcode');
+            div.innerHTML = `
+                <input type="text" name="text" placeholder="Text">
+                <input type="text" name="name" placeholder="Name">
+                <button onclick="sendData()">Send</button>
+            `;
+
+            var chatlist = document.querySelector('.chatsend');
+            chatlist.appendChild(div);
+
+            sendButton = document.querySelector('.chatcode button');
+        }
+
+        function Getchat() {
+            var gasUrl = 'https://script.google.com/macros/s/AKfycbwfPglE22DreTD3X6s69WdOV3mh3C71a9DSyZLuR3YAz74ADc3b8EyCCJDfc1OogeUt/exec';
+            var url = gasUrl + '?id=' + idValue; 
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var data = JSON.parse(xhr.responseText);
+                    displayChat(data);
+                } else if (xhr.readyState === 4 && xhr.status !== 200) {
+                    console.error('Error:', xhr.status);
+                }
+            };
+            xhr.send();
+        }
+
+        function displayChat(data) {
+            var chatDiv = document.querySelector('.chatlist');
+            
+            chatDiv.innerHTML = '';
+            data.forEach(chat => {
+                var chatItem = document.createElement('div');
+                chatItem.classList.add('chat-item');
+
+                var chatText = document.createElement('p');
+                var date = new Date(chat['時間']);
+                var formattedDate = date.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
+                chatText.textContent = formattedDate + ' - ' + chat['名前'] + ': ' + chat['テキスト'];
+
+                chatItem.appendChild(chatText);
+                chatDiv.appendChild(chatItem);
+            });
+        }
+
+        function sendData() {
+            sendButton.disabled = true;
+
+            var textValue = document.querySelector('.chatcode input[name="text"]').value;
+            var nameValue = document.querySelector('.chatcode input[name="name"]').value;
+
+            var url = 'https://script.google.com/macros/s/AKfycbz8aVrqSX4L6aAE8NP2Q96sSRAISbo16e4e6jNo4wYyzVLbm2t4HpEdV8h7mRhnJW7IEA/exec' + '?id=' + encodeURIComponent(idValue) + '&text=' + encodeURIComponent(textValue) + '&name=' + encodeURIComponent(nameValue);
+fetch(url)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error('Failed to send message');
+    }
+    return response.text(); // テキスト形式のデータを取得
+  })
+  .then(data => {
+    // データを表示するための処理
+    console.log(data); // 取得したデータをコンソールに表示
+
+    var successMsg = document.createElement('p');
+    successMsg.textContent = data; // データをそのまま表示
+    document.querySelector('.chatcode').appendChild(successMsg);
+    setTimeout(() => {
+      successMsg.remove();
+    }, 2000);
+    
+    Getchat(); // チャットを更新
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  })
+  .finally(() => {
+    sendButton.disabled = false;
+  });
+
+
+        }
+
+        setInterval(function() {
+            Getchat();
+        }, 10000);
+
+        Getchat();
+    </script>
+</body>
+</html>
