@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat for everyone</title>
+</head>
+<body>
+    <h1>Chat for everyone</h1>
+    <h2>はじめに</h2>
+    <ol>
+        <li>こんにちはPsanです。</li>
+        <li>今回は、誰でも自分のサイトにChatを導入できるコードを書きました。</li>
+    </ol>
+    <h2>導入方法</h2>
+    <ol>
+        <li>まず、<button onclick="generateAndDisplay()">生成</button>を押してIDを生成します。</li>
+        <li>次に、<a href="https://raw.githubusercontent.com/hirotomoki12345/Chatcode/main/source/example.html">サンプルコード</a>をサイトのhtmlに追加します。</li>
+        <li>そして、<code>const idValue = "取得したIDを入力してください。";</code>の値を生成したIDにします。</li>
+    </ol>
+    <div id="result"></div>
+    <script>
+        function generateRandomString(length) {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < length; i++) {
+                result += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return result;
+        }
+
+        function generateAndDisplay() {
+            const randomString = generateRandomString(30);
+            const url = 'https://script.google.com/macros/s/AKfycbw-1MptfsvYkF9bw4eQKQxeYZnpxoN7jIajcyu7pqSN_ESJogszLxkR6zgZ61MR-69a5A/exec?mode=create&id=' + randomString;
+
+            fetch(url)
+                .then(response => response.text())
+                .then(data => {
+                    const resultDiv = document.getElementById('result');
+                    resultDiv.innerHTML = '<p>生成したID: ' + randomString + '</p>';
+                    resultDiv.innerHTML += '<p>GASからの返答: ' + data + '</p>';
+                })
+                .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
